@@ -1,5 +1,5 @@
 import os
-
+import statistics
 def build_list_google(start_time, end_time, input_file):
     f = open(input_file, 'r')
 
@@ -93,6 +93,7 @@ def jedai_stats(jedai_locs, enter_time, exit_time):
     num_wakes = len(wakes)
     average_wake = float(sum(wakes))/num_wakes
     print()
+    print(statistics.median(wakes))
     print("Number of wakes of JedAI: " + str(num_wakes))
     print("Average wake time of JedAI: " + str(average_wake))
     print("Number of unique locations of JedAI: " + str(len(unique_locs)))
@@ -127,6 +128,9 @@ def google_stats(google_locs, enter_time, exit_time):
         prev_lat[loc_type] = curr_lat
         prev_lon[loc_type] = curr_lon
     
+    print(statistics.median(wakes['gps']))
+    print(statistics.median(wakes['network']))
+    print(statistics.median(wakes['fused']))
     num_wakes = [len(wakes['gps']), len(wakes['network']), len(wakes['fused'])]
     average_wakes = [
         sum(wakes['gps'])/num_wakes[0], 
